@@ -1,0 +1,24 @@
+#include "main.h"
+/**
+ * _printf- function that produces output according to w format
+ * @format: format according to which argument will be printed
+ * Return: return numbers of characters
+ */
+int _printf(const char *format, ...)
+{
+	int count= 0;
+	va_list args;
+	if(format== NULL)
+		return(-1);
+	va_start(args, format);
+	while(*format != '\0')
+	{
+		if(*format != '%')
+		{
+			write(1, format, 1);
+		}
+		format++;
+	}
+		return(count);
+
+}
