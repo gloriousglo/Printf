@@ -1,24 +1,53 @@
 #include "main.h"
 /**
- * _printf- function that produces output according to w format
- * @format: format according to which argument will be printed
- * Return: return numbers of characters
+ * printf_ - function that produces output according to thr given format
+ * format: format to print output
+ * return: return the numbers of char printed
  */
-int _printf(const char *format, ...)
-{
-	int count= 0;
-	va_list args;
-	if(format== NULL)
-		return(-1);
-	va_start(args, format);
-	while(*format != '\0')
+
+int printf_ (const char *format){
+	int count;
+	va_list valist;
+	char character;
+	char *str;
+	int len;
+	int number;
+	count = 0;
+	if (format == NULL)
+		return (-1);
+	va_start (valist, format);
+	while(*format)
 	{
-		if(*format != '%')
+		if(*format != "%")
 		{
 			write(1, format, 1);
+			count ++;
 		}
-		format++;
-	}
+		else
+		{
+			format ++;
+			if(*format == "%")
+			{
+				write(1, format, 1);
+				count ++;
+			}
+			else if(*format =='c')
+			{
+				character = var_arg (valist, imt);
+				write(1, & character, 1);
+				count ++
+			}
+			else if (*format == 's')
+			{
+				str = va_arg(valist, char*);
+			}
+			else
+			{
+				count += function2(valist, format);
+			}
+			format ++;
+		}
+		va_end(valist);
 		return(count);
+	}
 
-}
